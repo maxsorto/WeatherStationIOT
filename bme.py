@@ -3,7 +3,7 @@ from twisted.internet import reactor
 from Adafruit_BME280 import *
 import picamera
 
-timeout = 15.0
+timeout = 5.0
 """
 def take_photo():
 
@@ -16,7 +16,11 @@ def take_photo():
     camera.capture(photo_file_name)
 """
 
+
 def read_temp():
+
+    my_file = open('log.txt', 'a')
+
 
     sensor = BME280(mode=BME280_OSAMPLE_8)
 
@@ -30,13 +34,12 @@ def read_temp():
     pressure = 'Pressure  = {0:0.2f} hPa'.format(hectopascals)
     humidity = 'Humidity  = {0:0.2f} %'.format(humidity)
 
-    print timestamp
-    print temp
-    print pressure
-    print humidity
+    line = timestamp + "," + temp + "," + pressure + "," + humidity + "\n"
+
+    my_file.write(line)
+
     
     return None
-
 
 l = task.LoopingCall(read_temp)
 l.start(timeout)

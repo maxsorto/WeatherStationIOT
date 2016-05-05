@@ -1,0 +1,9 @@
+Timestamp = 131263.000,Temp = 25.637 deg C,Pressure  = 997.19 hPa,Humidity  = 40.04 %
+Timestamp = 131459.000,Temp = 25.676 deg C,Pressure  = 997.15 hPa,Humidity  = 39.96 %
+Timestamp = 131421.000,Temp = 25.668 deg C,Pressure  = 997.13 hPa,Humidity  = 39.99 %
+Timestamp = 131428.000,Temp = 25.670 deg C,Pressure  = 997.12 hPa,Humidity  = 39.97 %
+Timestamp = 131491.000,Temp = 25.682 deg C,Pressure  = 997.12 hPa,Humidity  = 39.93 %
+Timestamp = 131475.000,Temp = 25.679 deg C,Pressure  = 997.13 hPa,Humidity  = 39.96 %
+Timestamp = 131491.000,Temp = 25.682 deg C,Pressure  = 997.14 hPa,Humidity  = 39.95 %
+Timestamp = 131491.000,Temp = 25.682 deg C,Pressure  = 997.10 hPa,Humidity  = 39.94 %
+Timestamp = 131523.000,Temp = 25.688 deg C,Pressure  = 997.13 hPa,Humidity  = 39.93 %
