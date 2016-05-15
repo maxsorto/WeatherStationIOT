@@ -1,26 +1,14 @@
-from twisted.internet import task
-from twisted.internet import reactor
 from Adafruit_BME280 import *
+from time import sleep
 import picamera
-
-timeout = 5.0
-"""
-def take_photo():
-
-    sensor = BME280(mode=BME280_OSAMPLE_8)   
-    
-    time = '{0:0.3f}'.format(sensor.t_fine)
-    photo_file_name = 'image' + time + '.jpg'
-
-    camera = picamera.PiCamera()
-    camera.capture(photo_file_name)
-"""
+import os
+import time
+import subprocess
 
 
 def read_temp():
 
     my_file = open('log.txt', 'a')
-
 
     sensor = BME280(mode=BME280_OSAMPLE_8)
 
@@ -38,10 +26,40 @@ def read_temp():
 
     my_file.write(line)
 
-    
+    time_photo = '{0:0.3f}'.format(sensor.t_fine)
+ 
+    list_ex  = ['auto']    
+    list_awb = ['auto']
+ 
+# EV level
+    photo_ev = 0
+ 
+# Photo dimensions and rotation
+    photo_width  = 640
+    photo_height = 480
+    photo_rotate = 0
+ 
+    photo_interval = 0.25 # Interval between photos (seconds)
+    photo_counter  = 0    # Photo counter
+ 
+    total_photos = len(list_ex) * len(list_awb)
+ 
+ 
+# Lets start taking photos!
+    try:
+ 
+      for ex in list_ex:
+        for awb in list_awb:
+          photo_counter = photo_counter + 1
+          filename = 'imgs/photo_' + time_photo +'.jpg'
+          cmd = 'raspistill -o ' + filename + ' -t 1000 -ex ' + ex +' -awb ' + awb + ' -ev ' + str(photo_ev) + ' -w ' + str(photo_width) + ' -h ' + str(photo_height) + ' -rot ' + str(photo_rotate)
+          pid = subprocess.call(cmd, shell=True)
+          print "Image created in 'imgs' folder: " + filename
+          time.sleep(photo_interval)
+ 
+ 
+    except KeyboardInterrupt:
+  # User quit
+      print "\nGoodbye!"
+
     return None
-
-l = task.LoopingCall(read_temp)
-l.start(timeout)
-
-reactor.run()
